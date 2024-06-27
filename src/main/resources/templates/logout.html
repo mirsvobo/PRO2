@@ -1,0 +1,13 @@
+<!-- src/main/resources/templates/logout.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Logout</title>
+</head>
+<body>
+<h1>Logout</h1>
+<form th:action="@{/auth/logout}" method="post">
+    <button type="submit">Logout</button>
+</form>
+</body>
+</html>

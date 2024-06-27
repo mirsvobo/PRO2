@@ -1,6 +1,7 @@
 package com.example.warehousemanagement.model;
 
 import jakarta.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
 public class ProductVariant {
@@ -11,16 +12,14 @@ public class ProductVariant {
 
     private String name;
     private String description;
-    private double price;
-    private int initialQuantity;
-    private int receivedQuantity;
-    private int finalQuantity;
+    private BigDecimal price;
 
     @ManyToOne
     @JoinColumn(name = "item_id")
     private Item item;
 
-    // Gettery a settery
+    // Getters and setters
+
     public Long getId() {
         return id;
     }
@@ -45,36 +44,12 @@ public class ProductVariant {
         this.description = description;
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
-    }
-
-    public int getInitialQuantity() {
-        return initialQuantity;
-    }
-
-    public void setInitialQuantity(int initialQuantity) {
-        this.initialQuantity = initialQuantity;
-    }
-
-    public int getReceivedQuantity() {
-        return receivedQuantity;
-    }
-
-    public void setReceivedQuantity(int receivedQuantity) {
-        this.receivedQuantity = receivedQuantity;
-    }
-
-    public int getFinalQuantity() {
-        return finalQuantity;
-    }
-
-    public void setFinalQuantity(int finalQuantity) {
-        this.finalQuantity = finalQuantity;
     }
 
     public Item getItem() {
@@ -83,10 +58,5 @@ public class ProductVariant {
 
     public void setItem(Item item) {
         this.item = item;
-    }
-
-    // Metoda pro výpočet spotřeby
-    public int calculateConsumption() {
-        return (initialQuantity + receivedQuantity) - finalQuantity;
     }
 }

@@ -1,34 +1,32 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>List of Variants</title>
+    <title>List of Product Variants</title>
 </head>
 <body>
-<h1>List of Variants</h1>
+<h1>List of Product Variants</h1>
 <table>
     <tr>
         <th>Name</th>
         <th>Description</th>
         <th>Price</th>
-        <th>Initial Quantity</th>
-        <th>Received Quantity</th>
-        <th>Final Quantity</th>
+        <th>Item</th>
         <th>Actions</th>
     </tr>
     <tr th:each="variant : ${variants}">
         <td th:text="${variant.name}">Name</td>
         <td th:text="${variant.description}">Description</td>
         <td th:text="${variant.price}">Price</td>
-        <td th:text="${variant.initialQuantity}">Initial Quantity</td>
-        <td th:text="${variant.receivedQuantity}">Received Quantity</td>
-        <td th:text="${variant.finalQuantity}">Final Quantity</td>
+        <td th:text="${variant.item != null ? variant.item.name : 'No Item'}">Item Name</td>
         <td>
             <a th:href="@{/variants/edit/{id}(id=${variant.id})}">Edit</a>
-            <form th:action="@{/variants/delete/{id}(id=${variant.id})}" method="post">
+            <form th:action="@{/variants/delete/{id}(id=${variant.id})}" method="post" style="display:inline;">
+                <input type="hidden" name="_method" value="DELETE"/>
                 <button type="submit">Delete</button>
             </form>
         </td>
     </tr>
 </table>
+<a th:href="@{/variants/new}">Add New Variant</a>
 </body>
 </html>

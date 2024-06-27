@@ -23,7 +23,8 @@ public class Item {
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<ProductVariant> variants;
 
-    // Gettery a settery
+    // Getters and setters
+
     public Long getId() {
         return id;
     }

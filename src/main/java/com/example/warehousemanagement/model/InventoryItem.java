@@ -10,14 +10,18 @@ public class InventoryItem {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "product_variant_id")
-    private ProductVariant productVariant;
-
-    @ManyToOne
     @JoinColumn(name = "inventory_id")
     private Inventory inventory;
 
-    // Gettery a settery
+    @ManyToOne
+    @JoinColumn(name = "variant_id")
+    private ProductVariant productVariant;
+
+    private int initialQuantity;
+    private int finalQuantity;
+    private int delivered;
+
+    // Getters and Setters
 
     public Long getId() {
         return id;
@@ -25,6 +29,14 @@ public class InventoryItem {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Inventory getInventory() {
+        return inventory;
+    }
+
+    public void setInventory(Inventory inventory) {
+        this.inventory = inventory;
     }
 
     public ProductVariant getProductVariant() {
@@ -35,11 +47,27 @@ public class InventoryItem {
         this.productVariant = productVariant;
     }
 
-    public Inventory getInventory() {
-        return inventory;
+    public int getInitialQuantity() {
+        return initialQuantity;
     }
 
-    public void setInventory(Inventory inventory) {
-        this.inventory = inventory;
+    public void setInitialQuantity(int initialQuantity) {
+        this.initialQuantity = initialQuantity;
+    }
+
+    public int getFinalQuantity() {
+        return finalQuantity;
+    }
+
+    public void setFinalQuantity(int finalQuantity) {
+        this.finalQuantity = finalQuantity;
+    }
+
+    public int getDelivered() {
+        return delivered;
+    }
+
+    public void setDelivered(int delivered) {
+        this.delivered = delivered;
     }
 }

@@ -18,7 +18,7 @@ public class Inventory {
     @OneToMany(mappedBy = "inventory", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<InventoryItem> inventoryItems;
 
-    // Gettery a settery
+    // Getters and setters
 
     public Long getId() {
         return id;
@@ -64,7 +64,7 @@ public class Inventory {
         for (InventoryItem item : inventoryItems) {
             ProductVariant variant = item.getProductVariant();
             if (variant != null) {
-                int consumption = variant.calculateConsumption();
+                int consumption = item.getInitialQuantity() - item.getFinalQuantity();
                 System.out.println("Consumption for variant " + variant.getName() + ": " + consumption);
             } else {
                 System.err.println("ProductVariant is null for item: " + item.getId());

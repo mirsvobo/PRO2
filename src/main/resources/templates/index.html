@@ -14,7 +14,11 @@
             <li><a th:href="@{/suppliers}">Suppliers</a></li>
             <li><a th:href="@{/categories}">Categories</a></li>
             <li><a th:href="@{/variants}">Variants</a></li>
-            <li><a th:href="@{/auth/logout}">Logout</a></li>
+            <li>
+                <form th:action="@{/auth/logout}" method="post" style="display:inline;">
+                    <button type="submit" style="background:none;border:none;color:blue;text-decoration:underline;cursor:pointer;">Logout</button>
+                </form>
+            </li>
         </ul>
     </nav>
 </header>

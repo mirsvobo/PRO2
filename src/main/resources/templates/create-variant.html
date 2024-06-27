@@ -1,31 +1,27 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Editace varianty produktu</title>
+    <title>Create Product Variant</title>
 </head>
 <body>
-<h1>Editace varianty produktu</h1>
-<form th:action="@{'/variants/' + ${variant.id}}" th:object="${variant}" method="post">
-    <input type="hidden" th:field="*{id}" />
+<h1>Create Product Variant</h1>
+<form action="#" th:action="@{/variants}" th:object="${variant}" method="post">
+    <label for="name">Name:</label>
+    <input type="text" id="name" th:field="*{name}" /><br/>
 
-    <label for="name">Název:</label>
-    <input type="text" id="name" th:field="*{name}" />
+    <label for="description">Description:</label>
+    <input type="text" id="description" th:field="*{description}" /><br/>
 
-    <label for="description">Popis:</label>
-    <input type="text" id="description" th:field="*{description}" />
+    <label for="price">Price:</label>
+    <input type="text" id="price" th:field="*{price}" /><br/>
 
-    <label for="price">Cena:</label>
-    <input type="text" id="price" th:field="*{price}" />
+    <label for="item">Item:</label>
+    <select id="item" th:field="*{item.id}">
+        <option th:each="item : ${items}" th:value="${item.id}" th:text="${item.name}">Item Name</option>
+    </select><br/>
 
-    <label for="quantity">Množství:</label>
-    <input type="text" id="quantity" th:field="*{quantity}" />
-
-    <label for="item">Položka:</label>
-    <select id="item" th:field="*{item}">
-        <option th:each="item : ${items}" th:value="${item}" th:text="${item.name}">Položka</option>
-    </select>
-
-    <button type="submit">Uložit</button>
+    <button type="submit">Save</button>
 </form>
+<a th:href="@{/variants}">Back to List</a>
 </body>
 </html>

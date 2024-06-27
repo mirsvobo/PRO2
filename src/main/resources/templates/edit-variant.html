@@ -1,31 +1,27 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Upravit variantu</title>
+    <title>Edit Product Variant</title>
 </head>
 <body>
-<h1>Upravit variantu</h1>
-<form th:action="@{/variants/{id}(id=${variant.id})}" th:object="${variant}" method="post">
-    <input type="hidden" name="_method" value="put"/>
-    <label for="name">Název:</label>
-    <input type="text" id="name" th:field="*{name}" />
-    <br/>
-    <label for="price">Cena:</label>
-    <input type="text" id="price" th:field="*{price}" />
-    <br/>
-    <label for="quantity">Množství:</label>
-    <input type="text" id="quantity" th:field="*{quantity}" />
-    <br/>
-    <label for="item">Položka:</label>
+<h1>Edit Product Variant</h1>
+<form action="#" th:action="@{/variants/edit/{id}(id=${variant.id})}" th:object="${variant}" method="post">
+    <label for="name">Name:</label>
+    <input type="text" id="name" th:field="*{name}" /><br/>
+
+    <label for="description">Description:</label>
+    <input type="text" id="description" th:field="*{description}" /><br/>
+
+    <label for="price">Price:</label>
+    <input type="text" id="price" th:field="*{price}" /><br/>
+
+    <label for="item">Item:</label>
     <select id="item" th:field="*{item.id}">
-        <option th:each="item : ${items}" th:value="${item.id}" th:text="${item.name}">Item</option>
-    </select>
-    <br/>
-    <label for="note">Poznámka:</label>
-    <textarea id="note" th:field="*{description}"></textarea>
-    <br/>
-    <button type="submit">Aktualizovat</button>
+        <option th:each="item : ${items}" th:value="${item.id}" th:text="${item.name}">Item Name</option>
+    </select><br/>
+
+    <button type="submit">Save</button>
 </form>
-<a href="/variants">Zpět na seznam variant</a>
+<a th:href="@{/variants}">Back to List</a>
 </body>
 </html>

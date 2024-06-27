@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Product Variants</title>
+    <title>Variants</title>
 </head>
 <body>
-<div th:replace="fragments/header :: header"></div>
-<h2>Product Variants</h2>
-<a th:href="@{/variants/new}">Create New Product Variant</a>
+<h1>Variants List</h1>
 <table>
     <thead>
     <tr>
+        <th>ID</th>
         <th>Name</th>
         <th>Actions</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="variant : ${variants}">
+        <td th:text="${variant.id}">1</td>
         <td th:text="${variant.name}">Variant Name</td>
         <td>
             <a th:href="@{/variants/edit/{id}(id=${variant.id})}">Edit</a>
@@ -24,5 +24,7 @@
     </tr>
     </tbody>
 </table>
+<!-- Odkaz na přidání nové varianty -->
+<a th:href="@{/variants/new}">Add New Variant</a>
 </body>
 </html>
