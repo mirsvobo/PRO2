@@ -37,7 +37,7 @@ public class CategoryController {
     public String editCategoryForm(@PathVariable Long id, Model model) {
         Category category = categoryService.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid category Id:" + id));
         model.addAttribute("category", category);
-        return "edit_category";
+        return "edit-category";
     }
 
     @PostMapping("/{id}")
