@@ -1,20 +1,21 @@
 package com.example.warehousemanagement.model;
 
 import jakarta.persistence.*;
-import java.time.LocalDate;
 import java.util.List;
 
 @Entity
 public class Receipt {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private LocalDate date;
+    private String month;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ReceiptItem> receiptItems;
+    @OneToMany(mappedBy = "receipt", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Item> items;
 
+    // Gettery a settery
     public Long getId() {
         return id;
     }
@@ -23,21 +24,19 @@ public class Receipt {
         this.id = id;
     }
 
-    public LocalDate getDate() {
-        return date;
+    public String getMonth() {
+        return month;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
+    public void setMonth(String month) {
+        this.month = month;
     }
 
-    public List<ReceiptItem> getReceiptItems() {
-        return receiptItems;
+    public List<Item> getItems() {
+        return items;
     }
 
-    public void setReceiptItems(List<ReceiptItem> receiptItems) {
-        this.receiptItems = receiptItems;
+    public void setItems(List<Item> items) {
+        this.items = items;
     }
-
-    // Getters and setters
 }

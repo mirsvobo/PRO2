@@ -1,22 +1,23 @@
 package com.example.warehousemanagement.model;
 
-
 import jakarta.persistence.*;
-import java.util.List;
 
 @Entity
 public class ProductVariant {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
     private String description;
-
-    @ManyToOne(fetch = FetchType.LAZY)
+    private double price;
+    private int quantity;
+    @ManyToOne
     @JoinColumn(name = "item_id")
     private Item item;
 
+    // Gettery a settery
     public Long getId() {
         return id;
     }
@@ -47,5 +48,21 @@ public class ProductVariant {
 
     public void setItem(Item item) {
         this.item = item;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }

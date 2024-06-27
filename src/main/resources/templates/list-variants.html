@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Seznam variant produktů</title>
+</head>
+<body>
+<h1>Seznam variant produktů</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Název</th>
+        <th>Cena</th>
+        <th>Množství</th>
+        <th>Položka</th>
+        <th>Popis</th>
+        <th>Akce</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="variant : ${variants}">
+        <td th:text="${variant.name}">Název</td>
+        <td th:text="${variant.price}">Cena</td>
+        <td th:text="${variant.quantity}">Množství</td>
+        <td th:text="${variant.item != null ? variant.item.name : 'N/A'}">Položka</td>
+        <td th:text="${variant.description}">Popis</td>
+        <td>
+            <a th:href="@{'/variants/edit/' + ${variant.id}}">Edit</a>
+            <form th:action="@{'/variants/delete/' + ${variant.id}}" method="post" style="display:inline;">
+                <input type="hidden" name="_method" value="DELETE"/>
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

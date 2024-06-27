@@ -29,5 +29,9 @@ public class ProductVariantService {
         return productVariantRepository.findByItem(item);
     }
 
+    public void deleteById(Long id) {
+        productVariantRepository.deleteById(id);
+    }
+
 
 }

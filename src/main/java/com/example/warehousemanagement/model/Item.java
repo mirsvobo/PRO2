@@ -1,7 +1,7 @@
 package com.example.warehousemanagement.model;
 
 import jakarta.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 public class Item {
@@ -11,19 +11,23 @@ public class Item {
     private Long id;
 
     private String name;
-    private Double price;
 
     @ManyToOne
+    @JoinColumn(name = "category_id")
     private Category category;
 
     @ManyToOne
+    @JoinColumn(name = "supplier_id")
     private Supplier supplier;
 
-    @ManyToMany
-    private Set<ProductVariant> variants;
+    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<ProductVariant> variants;
+
+    @ManyToOne
+    @JoinColumn(name = "receipt_id")
+    private Receipt receipt;
 
     // Gettery a settery
-
     public Long getId() {
         return id;
     }
@@ -38,14 +42,6 @@ public class Item {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
     }
 
     public Category getCategory() {
@@ -64,11 +60,19 @@ public class Item {
         this.supplier = supplier;
     }
 
-    public Set<ProductVariant> getVariants() {
+    public List<ProductVariant> getVariants() {
         return variants;
     }
 
-    public void setVariants(Set<ProductVariant> variants) {
+    public void setVariants(List<ProductVariant> variants) {
         this.variants = variants;
+    }
+
+    public Receipt getReceipt() {
+        return receipt;
+    }
+
+    public void setReceipt(Receipt receipt) {
+        this.receipt = receipt;
     }
 }

@@ -8,21 +8,22 @@
 <table>
     <thead>
     <tr>
+        <th>ID</th>
         <th>Name</th>
-        <th>Price</th>
         <th>Category</th>
         <th>Supplier</th>
+        <th>Receipt</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="item : ${items}">
+        <td th:text="${item.id}">ID</td>
         <td th:text="${item.name}">Name</td>
-        <td th:text="${item.price}">Price</td>
-        <td th:text="${item.category.name}">Category</td>
-        <td th:text="${item.supplier.name}">Supplier</td>
+        <td th:text="${item.category != null ? item.category.name : 'N/A'}">Category</td>
+        <td th:text="${item.supplier != null ? item.supplier.name : 'N/A'}">Supplier</td>
+        <td th:text="${item.receipt != null ? item.receipt.id : 'N/A'}">Receipt</td>
     </tr>
     </tbody>
 </table>
-<a href="/items/new">Create New Item</a>
 </body>
 </html>

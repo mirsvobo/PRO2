@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/items")
 public class ItemController {
@@ -31,22 +33,22 @@ public class ItemController {
 
     @GetMapping
     public String listItems(Model model) {
-        model.addAttribute("items", itemService.findAll());
-        return "item-list"; // Název šablony pro seznam itemů
+        List<Item> items = itemService.findAll();
+        model.addAttribute("items", items);
+        return "list-items";
     }
 
-    @GetMapping("/new")
-    public String showCreateForm(Model model) {
+
+    @GetMapping("/items/new")
+    public String showCreateItemForm(Model model) {
         model.addAttribute("item", new Item());
-        model.addAttribute("categories", categoryService.findAll());
-        model.addAttribute("suppliers", supplierService.findAll());
-        model.addAttribute("variants", productVariantService.findAll());
-        return "create-item"; // Název šablony pro vytvoření itemu
+        return "create-item";
     }
 
-    @PostMapping("/create")
-    public String createItem(@ModelAttribute("item") Item item) {
+    @PostMapping("/items")
+    public String createItem(Item item) {
         itemService.save(item);
-        return "redirect:/items"; // Přesměrování po úspěšném vytvoření itemu
+        return "redirect:/items";
     }
+
 }

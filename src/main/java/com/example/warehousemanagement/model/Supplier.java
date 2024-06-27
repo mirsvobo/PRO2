@@ -1,20 +1,21 @@
 package com.example.warehousemanagement.model;
 
 import jakarta.persistence.*;
-
 import java.util.List;
 
 @Entity
 public class Supplier {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
 
-    @OneToMany(mappedBy = "supplier")
+    @OneToMany(mappedBy = "supplier", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Item> items;
 
+    // Gettery a settery
     public Long getId() {
         return id;
     }
