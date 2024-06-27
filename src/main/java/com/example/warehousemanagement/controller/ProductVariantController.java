@@ -20,6 +20,7 @@ public class ProductVariantController {
     @GetMapping("/new")
     public String createVariantForm(Model model) {
         model.addAttribute("variant", new ProductVariant());
+        model.addAttribute("items", itemService.findAll());
         return "create-variant";
     }
 
@@ -41,7 +42,6 @@ public class ProductVariantController {
         }
     }
 
-
     @PostMapping("/{id}")
     public String updateVariant(@PathVariable Long id, @ModelAttribute("variant") ProductVariant variant) {
         ProductVariant existingVariant = variantService.findById(id);
@@ -49,7 +49,9 @@ public class ProductVariantController {
             existingVariant.setName(variant.getName());
             existingVariant.setDescription(variant.getDescription());
             existingVariant.setPrice(variant.getPrice());
-            existingVariant.setQuantity(variant.getQuantity());
+            existingVariant.setInitialQuantity(variant.getInitialQuantity());
+            existingVariant.setReceivedQuantity(variant.getReceivedQuantity());
+            existingVariant.setFinalQuantity(variant.getFinalQuantity());
             existingVariant.setItem(variant.getItem());
             variantService.save(existingVariant);
             return "redirect:/variants";

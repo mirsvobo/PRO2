@@ -12,7 +12,7 @@
         <th>Name</th>
         <th>Category</th>
         <th>Supplier</th>
-        <th>Receipt</th>
+
     </tr>
     </thead>
     <tbody>
@@ -21,7 +21,6 @@
         <td th:text="${item.name}">Name</td>
         <td th:text="${item.category != null ? item.category.name : 'N/A'}">Category</td>
         <td th:text="${item.supplier != null ? item.supplier.name : 'N/A'}">Supplier</td>
-        <td th:text="${item.receipt != null ? item.receipt.id : 'N/A'}">Receipt</td>
     </tr>
     </tbody>
 </table>

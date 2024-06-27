@@ -1,37 +1,34 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Seznam variant produktů</title>
+    <title>List of Variants</title>
 </head>
 <body>
-<h1>Seznam variant produktů</h1>
+<h1>List of Variants</h1>
 <table>
-    <thead>
     <tr>
-        <th>Název</th>
-        <th>Cena</th>
-        <th>Množství</th>
-        <th>Položka</th>
-        <th>Popis</th>
-        <th>Akce</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Initial Quantity</th>
+        <th>Received Quantity</th>
+        <th>Final Quantity</th>
+        <th>Actions</th>
     </tr>
-    </thead>
-    <tbody>
     <tr th:each="variant : ${variants}">
-        <td th:text="${variant.name}">Název</td>
-        <td th:text="${variant.price}">Cena</td>
-        <td th:text="${variant.quantity}">Množství</td>
-        <td th:text="${variant.item != null ? variant.item.name : 'N/A'}">Položka</td>
-        <td th:text="${variant.description}">Popis</td>
+        <td th:text="${variant.name}">Name</td>
+        <td th:text="${variant.description}">Description</td>
+        <td th:text="${variant.price}">Price</td>
+        <td th:text="${variant.initialQuantity}">Initial Quantity</td>
+        <td th:text="${variant.receivedQuantity}">Received Quantity</td>
+        <td th:text="${variant.finalQuantity}">Final Quantity</td>
         <td>
-            <a th:href="@{'/variants/edit/' + ${variant.id}}">Edit</a>
-            <form th:action="@{'/variants/delete/' + ${variant.id}}" method="post" style="display:inline;">
-                <input type="hidden" name="_method" value="DELETE"/>
+            <a th:href="@{/variants/edit/{id}(id=${variant.id})}">Edit</a>
+            <form th:action="@{/variants/delete/{id}(id=${variant.id})}" method="post">
                 <button type="submit">Delete</button>
             </form>
         </td>
     </tr>
-    </tbody>
 </table>
 </body>
 </html>

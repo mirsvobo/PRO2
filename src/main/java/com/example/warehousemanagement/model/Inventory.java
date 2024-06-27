@@ -19,6 +19,7 @@ public class Inventory {
     private List<InventoryItem> inventoryItems;
 
     // Gettery a settery
+
     public Long getId() {
         return id;
     }
@@ -57,5 +58,17 @@ public class Inventory {
 
     public void setInventoryItems(List<InventoryItem> inventoryItems) {
         this.inventoryItems = inventoryItems;
+    }
+
+    public void calculateConsumptionForAllItems() {
+        for (InventoryItem item : inventoryItems) {
+            ProductVariant variant = item.getProductVariant();
+            if (variant != null) {
+                int consumption = variant.calculateConsumption();
+                System.out.println("Consumption for variant " + variant.getName() + ": " + consumption);
+            } else {
+                System.err.println("ProductVariant is null for item: " + item.getId());
+            }
+        }
     }
 }

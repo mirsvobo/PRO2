@@ -12,7 +12,10 @@ public class ProductVariant {
     private String name;
     private String description;
     private double price;
-    private int quantity;
+    private int initialQuantity;
+    private int receivedQuantity;
+    private int finalQuantity;
+
     @ManyToOne
     @JoinColumn(name = "item_id")
     private Item item;
@@ -42,14 +45,6 @@ public class ProductVariant {
         this.description = description;
     }
 
-    public Item getItem() {
-        return item;
-    }
-
-    public void setItem(Item item) {
-        this.item = item;
-    }
-
     public double getPrice() {
         return price;
     }
@@ -58,11 +53,40 @@ public class ProductVariant {
         this.price = price;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public int getInitialQuantity() {
+        return initialQuantity;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setInitialQuantity(int initialQuantity) {
+        this.initialQuantity = initialQuantity;
+    }
+
+    public int getReceivedQuantity() {
+        return receivedQuantity;
+    }
+
+    public void setReceivedQuantity(int receivedQuantity) {
+        this.receivedQuantity = receivedQuantity;
+    }
+
+    public int getFinalQuantity() {
+        return finalQuantity;
+    }
+
+    public void setFinalQuantity(int finalQuantity) {
+        this.finalQuantity = finalQuantity;
+    }
+
+    public Item getItem() {
+        return item;
+    }
+
+    public void setItem(Item item) {
+        this.item = item;
+    }
+
+    // Metoda pro výpočet spotřeby
+    public int calculateConsumption() {
+        return (initialQuantity + receivedQuantity) - finalQuantity;
     }
 }

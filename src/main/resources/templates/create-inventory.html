@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Create Inventory</title>
+    <title>Create Receipt</title>
 </head>
 <body>
-<h1>Create Inventory</h1>
-<form th:action="@{/inventories}" th:object="${inventory}" method="post">
+<h1>Create New Receipt</h1>
+<form th:action="@{/receipts}" th:object="${receipt}" method="post">
     <div>
         <label for="date">Date:</label>
         <input type="date" id="date" th:field="*{date}" />
@@ -26,13 +26,13 @@
             <div th:each="variant : ${item.variants}">
                 <div>
                     <label th:for="|quantity-${variant.id}|">Quantity for variant <span th:text="${variant.name}"></span>:</label>
-                    <input type="number" th:id="|quantity-${variant.id}|" th:name="|quantity-${variant.id}|" />
+                    <input type="number" th:id="|quantity-${variant.id}|" th:name="|quantity-${variant.id}|" th:field="*{items[__${variant.id}__].quantity}" />
                 </div>
             </div>
         </div>
     </div>
 
-    <button type="submit">Create Inventory</button>
+    <button type="submit">Create Receipt</button>
 </form>
 </body>
 </html>

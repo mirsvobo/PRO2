@@ -4,17 +4,20 @@ import jakarta.persistence.*;
 
 @Entity
 public class InventoryItem {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    private Item item;
+    @JoinColumn(name = "product_variant_id")
+    private ProductVariant productVariant;
 
     @ManyToOne
+    @JoinColumn(name = "inventory_id")
     private Inventory inventory;
 
-    private int quantity;
+    // Gettery a settery
 
     public Long getId() {
         return id;
@@ -24,12 +27,12 @@ public class InventoryItem {
         this.id = id;
     }
 
-    public Item getItem() {
-        return item;
+    public ProductVariant getProductVariant() {
+        return productVariant;
     }
 
-    public void setItem(Item item) {
-        this.item = item;
+    public void setProductVariant(ProductVariant productVariant) {
+        this.productVariant = productVariant;
     }
 
     public Inventory getInventory() {
@@ -38,13 +41,5 @@ public class InventoryItem {
 
     public void setInventory(Inventory inventory) {
         this.inventory = inventory;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
     }
 }

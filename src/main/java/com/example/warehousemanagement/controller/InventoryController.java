@@ -47,6 +47,7 @@ public class InventoryController {
     @PostMapping
     public String saveInventory(@ModelAttribute("inventory") Inventory inventory) {
         inventoryService.save(inventory);
+        inventoryService.calculateConsumption(inventory);
         return "redirect:/inventories";
     }
 
@@ -61,6 +62,7 @@ public class InventoryController {
     @PostMapping("/{id}")
     public String updateInventory(@PathVariable Long id, @ModelAttribute("inventory") Inventory inventory) {
         inventoryService.save(inventory);
+        inventoryService.calculateConsumption(inventory);
         return "redirect:/inventories";
     }
 

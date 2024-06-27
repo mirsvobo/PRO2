@@ -23,10 +23,6 @@ public class Item {
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<ProductVariant> variants;
 
-    @ManyToOne
-    @JoinColumn(name = "receipt_id")
-    private Receipt receipt;
-
     // Gettery a settery
     public Long getId() {
         return id;
@@ -66,13 +62,5 @@ public class Item {
 
     public void setVariants(List<ProductVariant> variants) {
         this.variants = variants;
-    }
-
-    public Receipt getReceipt() {
-        return receipt;
-    }
-
-    public void setReceipt(Receipt receipt) {
-        this.receipt = receipt;
     }
 }
