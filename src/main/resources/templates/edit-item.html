@@ -4,31 +4,31 @@
     <title>Edit Item</title>
 </head>
 <body>
-<div th:replace="fragments/header :: header"></div>
-<h2>Edit Item</h2>
-<form th:action="@{/items/{id}(id=${item.id})}" th:object="${item}" method="post">
-    <label for="name">Name:</label>
-    <input type="text" id="name" th:field="*{name}" required>
-
-    <label for="price">Price:</label>
-    <input type="number" id="price" th:field="*{price}" step="0.01" required>
-
-    <label for="supplier">Supplier:</label>
-    <select id="supplier" th:field="*{supplier}" required>
-        <option th:each="supplier : ${suppliers}" th:value="${supplier.id}" th:text="${supplier.name}"></option>
-    </select>
-
-    <label for="category">Category:</label>
-    <select id="category" th:field="*{category}" required>
-        <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
-    </select>
-
-    <label for="variant">Variant:</label>
-    <select id="variant" th:field="*{variant}" required>
-        <option th:each="variant : ${variants}" th:value="${variant.id}" th:text="${variant.name}"></option>
-    </select>
-
-    <button type="submit">Save</button>
+<h1>Edit Item</h1>
+<form th:action="@{/items/edit/{id}(id=${item.id})}" method="post">
+    <input type="hidden" name="_method" value="put" />
+    <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" th:value="${item.name}" required />
+    </div>
+    <div>
+        <label for="category">Category:</label>
+        <select id="category" name="category.id" required>
+            <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"
+                    th:selected="${item.category != null} ? ${item.category.id} == ${category.id} : false"></option>
+        </select>
+    </div>
+    <div>
+        <label for="supplier">Supplier:</label>
+        <select id="supplier" name="supplier.id" required>
+            <option th:each="supplier : ${suppliers}" th:value="${supplier.id}" th:text="${supplier.name}"
+                    th:selected="${item.supplier != null} ? ${item.supplier.id} == ${supplier.id} : false"></option>
+        </select>
+    </div>
+    <div>
+        <button type="submit">Save</button>
+    </div>
 </form>
+<a th:href="@{/items}">Back to list</a>
 </body>
 </html>

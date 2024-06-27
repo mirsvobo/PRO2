@@ -1,28 +1,30 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Item List</title>
+    <title>List Items</title>
 </head>
 <body>
-<h1>Item List</h1>
+<h1>Items</h1>
 <table>
-    <thead>
     <tr>
-        <th>ID</th>
         <th>Name</th>
         <th>Category</th>
         <th>Supplier</th>
-
+        <th>Actions</th>
     </tr>
-    </thead>
-    <tbody>
     <tr th:each="item : ${items}">
-        <td th:text="${item.id}">ID</td>
-        <td th:text="${item.name}">Name</td>
-        <td th:text="${item.category != null ? item.category.name : 'N/A'}">Category</td>
-        <td th:text="${item.supplier != null ? item.supplier.name : 'N/A'}">Supplier</td>
+        <td th:text="${item.name}">Item Name</td>
+        <td th:text="${item.category.name}">Category Name</td>
+        <td th:text="${item.supplier != null ? item.supplier.name : 'No Supplier'}">Supplier Name</td>
+        <td>
+            <a th:href="@{/items/edit/{id}(id=${item.id})}">Edit</a>
+            <form th:action="@{/items/delete/{id}(id=${item.id})}" method="post">
+                <input type="hidden" name="_method" value="delete" />
+                <button type="submit">Delete</button>
+            </form>
+        </td>
     </tr>
-    </tbody>
 </table>
+<a href="/items/new">Create New Item</a>
 </body>
 </html>

@@ -1,65 +1,30 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Create Item</title>
+    <title>Create New Item</title>
 </head>
 <body>
-<h1>Create Item</h1>
-<form th:action="@{/items}" th:object="${item}" method="post">
+<h1>Create New Item</h1>
+<form action="#" th:action="@{/items}" th:object="${item}" method="post">
     <div>
-        <label for="name">Item Name:</label>
+        <label for="name">Name:</label>
         <input type="text" id="name" th:field="*{name}" />
     </div>
     <div>
-        <h2>Variants</h2>
-        <div th:each="variant, iterStat : ${item.variants}">
-            <div>
-                <label th:for="|variant-name-${iterStat.index}|">Variant Name:</label>
-                <input type="text" th:field="*{variants[__${iterStat.index}__].name}" id="|variant-name-${iterStat.index}|" />
-            </div>
-            <div>
-                <label th:for="|variant-price-${iterStat.index}|">Variant Price:</label>
-                <input type="text" th:field="*{variants[__${iterStat.index}__].price}" id="|variant-price-${iterStat.index}|" />
-            </div>
-        </div>
-        <div>
-            <button type="button" th:onclick="|addVariant()|">Add Variant</button>
-        </div>
+        <label for="category">Category:</label>
+        <select id="category" th:field="*{category}">
+            <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}">Category Name</option>
+        </select>
+    </div>
+    <div>
+        <label for="supplier">Supplier:</label>
+        <select id="supplier" th:field="*{supplier}">
+            <option th:each="supplier : ${suppliers}" th:value="${supplier.id}" th:text="${supplier.name}">Supplier Name</option>
+        </select>
     </div>
     <div>
         <button type="submit">Save</button>
     </div>
 </form>
-<script>
-    function addVariant() {
-        var form = document.querySelector('form');
-        var index = form.querySelectorAll('[id^=variant-name-]').length;
-        var variantDiv = document.createElement('div');
-
-        var nameLabel = document.createElement('label');
-        nameLabel.setAttribute('for', 'variant-name-' + index);
-        nameLabel.textContent = 'Variant Name:';
-        variantDiv.appendChild(nameLabel);
-
-        var nameInput = document.createElement('input');
-        nameInput.type = 'text';
-        nameInput.id = 'variant-name-' + index;
-        nameInput.name = 'variants[' + index + '].name';
-        variantDiv.appendChild(nameInput);
-
-        var priceLabel = document.createElement('label');
-        priceLabel.setAttribute('for', 'variant-price-' + index);
-        priceLabel.textContent = 'Variant Price:';
-        variantDiv.appendChild(priceLabel);
-
-        var priceInput = document.createElement('input');
-        priceInput.type = 'text';
-        priceInput.id = 'variant-price-' + index;
-        priceInput.name = 'variants[' + index + '].price';
-        variantDiv.appendChild(priceInput);
-
-        form.insertBefore(variantDiv, form.querySelector('button[type=submit]').parentNode);
-    }
-</script>
 </body>
 </html>
