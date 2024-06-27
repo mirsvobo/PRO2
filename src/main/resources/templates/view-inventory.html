@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Inventory View</title>
+</head>
+<body>
+<h1>Inventory Details</h1>
+
+<table>
+    <thead>
+    <tr><!DOCTYPE html>
+        <html xmlns:th="http://www.thymeleaf.org">
+        <head>
+            <title>Inventory Details</title>
+        </head>
+        <body>
+        <table border="1">
+            <thead>
+            <tr>
+                <th>Item Name</th>
+                <th>Variants</th>
+                <th>Quantity</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="entry : ${itemsWithTotalQuantity}">
+                <td th:text="${entry.key.name}">Item Name</td>
+                <td>
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Variant Name</th>
+                            <th>Description</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="variant : ${entry.key.variants}">
+                            <td th:text="${variant.name}">Variant Name</td>
+                            <td th:text="${variant.description}">Description</td>
+                            <td th:text="${variant.price}">Price</td>
+                            <td th:text="${variant.quantity}">Quantity</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </td>
+                <td th:text="${entry.value}">Total Quantity</td>
+            </tr>
+            </tbody>
+        </table>
+        </body>
+        </html>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="entry : ${groupedItems}">
+        <td th:text="${entry.key.name}"></td>
+        <td>
+            <table>
+                <thead>
+                <tr>
+                    <th>Variant Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="variant : ${entry.key.variants}">
+                    <td th:text="${variant.name}"></td>
+                    <td th:text="${variant.description}"></td>
+                    <td th:text="${variant.price}"></td>
+                    <td th:text="${variant.quantity}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </td>
+        <td>
+            <table>
+                <tbody>
+                <tr th:each="inventoryItem : ${entry.value}">
+                    <td th:text="${inventoryItem.quantity}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

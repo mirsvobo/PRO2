@@ -4,25 +4,31 @@
     <title>Inventories</title>
 </head>
 <body>
-<div th:replace="fragments/header :: header"></div>
-<h2>Inventories</h2>
-<a th:href="@{/inventories/new}">Create New Inventory</a>
+<h1>Inventories</h1>
 <table>
     <thead>
     <tr>
+        <th>ID</th>
         <th>Date</th>
+        <th>Month</th>
+        <th>Year</th>
         <th>Actions</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="inventory : ${inventories}">
-        <td th:text="${inventory.date}">Inventory Date</td>
+        <td th:text="${inventory.id}">ID</td>
+        <td th:text="${inventory.date}">Date</td>
+        <td th:text="${inventory.month}">Month</td>
+        <td th:text="${inventory.year}">Year</td>
         <td>
+            <a th:href="@{/inventories/{id}(id=${inventory.id})}">View</a>
             <a th:href="@{/inventories/edit/{id}(id=${inventory.id})}">Edit</a>
-            <a th:href="@{/inventories/delete/{id}(id=${inventory.id})}">Delete</a>
+            <a th:href="@{/inventories/delete/{id}(id=${inventory.id})}" onclick="return confirm('Are you sure?');">Delete</a>
         </td>
     </tr>
     </tbody>
 </table>
+<a href="/inventories/new">Create New Inventory</a>
 </body>
 </html>

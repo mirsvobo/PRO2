@@ -11,6 +11,9 @@ public class InventoryItem {
     @ManyToOne
     private Item item;
 
+    @ManyToOne
+    private Inventory inventory;
+
     private int quantity;
 
     public Long getId() {
@@ -29,6 +32,14 @@ public class InventoryItem {
         this.item = item;
     }
 
+    public Inventory getInventory() {
+        return inventory;
+    }
+
+    public void setInventory(Inventory inventory) {
+        this.inventory = inventory;
+    }
+
     public int getQuantity() {
         return quantity;
     }
@@ -36,6 +47,4 @@ public class InventoryItem {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
-
-    // Getters and setters
 }

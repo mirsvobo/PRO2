@@ -1,27 +1,24 @@
 package com.example.warehousemanagement.model;
 
 import jakarta.persistence.*;
-
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
 
 @Entity
 public class Inventory {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private LocalDate date;
+    private int month;
+    private int year;
 
-    @ElementCollection
-    private List<Long> itemIds;
+    @OneToMany(mappedBy = "inventory", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<InventoryItem> inventoryItems;
 
-    @ElementCollection
-    @MapKeyColumn(name = "variant_id")
-    @Column(name = "quantity")
-    private Map<Long, Integer> itemQuantities;
-
+    // Gettery a settery
     public Long getId() {
         return id;
     }
@@ -38,19 +35,27 @@ public class Inventory {
         this.date = date;
     }
 
-    public List<Long> getItemIds() {
-        return itemIds;
+    public int getMonth() {
+        return month;
     }
 
-    public void setItemIds(List<Long> itemIds) {
-        this.itemIds = itemIds;
+    public void setMonth(int month) {
+        this.month = month;
     }
 
-    public Map<Long, Integer> getItemQuantities() {
-        return itemQuantities;
+    public int getYear() {
+        return year;
     }
 
-    public void setItemQuantities(Map<Long, Integer> itemQuantities) {
-        this.itemQuantities = itemQuantities;
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public List<InventoryItem> getInventoryItems() {
+        return inventoryItems;
+    }
+
+    public void setInventoryItems(List<InventoryItem> inventoryItems) {
+        this.inventoryItems = inventoryItems;
     }
 }

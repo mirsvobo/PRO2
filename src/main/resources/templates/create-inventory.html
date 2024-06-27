@@ -1,41 +1,38 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Create Item</title>
+    <title>Create Inventory</title>
 </head>
 <body>
-<h1>Create Item</h1>
-<form action="#" th:action="@{/items/create}" th:object="${item}" method="post">
+<h1>Create Inventory</h1>
+<form th:action="@{/inventories}" th:object="${inventory}" method="post">
     <div>
-        <label for="name">Name:</label>
-        <input type="text" id="name" th:field="*{name}" />
+        <label for="date">Date:</label>
+        <input type="date" id="date" th:field="*{date}" />
     </div>
     <div>
-        <label for="price">Price:</label>
-        <input type="text" id="price" th:field="*{price}" />
+        <label for="month">Month:</label>
+        <input type="number" id="month" th:field="*{month}" />
     </div>
     <div>
-        <label for="category">Category:</label>
-        <select id="category" th:field="*{category.id}">
-            <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
-        </select>
+        <label for="year">Year:</label>
+        <input type="number" id="year" th:field="*{year}" />
     </div>
+
     <div>
-        <label for="supplier">Supplier:</label>
-        <select id="supplier" th:field="*{supplier.id}">
-            <option th:each="supplier : ${suppliers}" th:value="${supplier.id}" th:text="${supplier.name}"></option>
-        </select>
-    </div>
-    <div>
-        <label for="variants">Variants:</label>
-        <div th:each="variant : ${item.variants}">
-            <input type="checkbox" th:field="*{variants}" th:value="${variant.id}" th:id="'variant-' + ${variant.id}" />
-            <label th:for="'variant-' + ${variant.id}" th:text="${variant.name}"></label>
+        <h2>Items</h2>
+        <div th:each="item : ${items}">
+            <h3 th:text="${item.name}">Item Name</h3>
+            <div th:each="variant : ${item.variants}">
+                <div>
+                    <label th:for="|quantity-${variant.id}|">Quantity for variant <span th:text="${variant.name}"></span>:</label>
+                    <input type="number" th:id="|quantity-${variant.id}|" th:name="|quantity-${variant.id}|" />
+                </div>
+            </div>
         </div>
     </div>
-    <div>
-        <button type="submit">Save</button>
-    </div>
+
+    <button type="submit">Create Inventory</button>
 </form>
 </body>
 </html>

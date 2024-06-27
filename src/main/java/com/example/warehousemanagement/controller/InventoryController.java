@@ -1,17 +1,18 @@
 package com.example.warehousemanagement.controller;
 
 import com.example.warehousemanagement.model.Inventory;
+import com.example.warehousemanagement.model.InventoryItem;
 import com.example.warehousemanagement.model.Item;
-import com.example.warehousemanagement.model.ProductVariant;
-import com.example.warehousemanagement.repository.ProductVariantRepository;
 import com.example.warehousemanagement.service.InventoryService;
 import com.example.warehousemanagement.service.ItemService;
 import com.example.warehousemanagement.service.ProductVariantService;
-import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/inventories")
@@ -36,11 +37,9 @@ public class InventoryController {
     public String createInventoryForm(Model model) {
         Inventory inventory = new Inventory();
         List<Item> items = itemService.findAll();
-        List<ProductVariant> variants = productVariantService.findAll();
 
         model.addAttribute("inventory", inventory);
         model.addAttribute("items", items);
-        model.addAttribute("variants", variants);
 
         return "create-inventory";
     }
@@ -69,5 +68,11 @@ public class InventoryController {
     public String deleteInventory(@PathVariable Long id) {
         inventoryService.delete(id);
         return "redirect:/inventories";
+    }
+
+    @GetMapping("/{id}")
+    public String viewInventory(@PathVariable Long id, Model model) {
+        model.addAttribute("itemsWithTotalQuantity", inventoryService.getItemsWithTotalQuantity());
+        return "view-inventory";
     }
 }
