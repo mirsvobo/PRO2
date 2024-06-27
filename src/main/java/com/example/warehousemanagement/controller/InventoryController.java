@@ -28,7 +28,7 @@ public class InventoryController {
     public String createInventoryForm(Model model) {
         model.addAttribute("inventory", new Inventory());
         model.addAttribute("items", itemService.findAll());
-        return "create_inventory";
+        return "create-inventory";
     }
 
     @PostMapping

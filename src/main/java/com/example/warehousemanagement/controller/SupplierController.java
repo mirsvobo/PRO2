@@ -24,7 +24,7 @@ public class SupplierController {
     @GetMapping("/new")
     public String createSupplierForm(Model model) {
         model.addAttribute("supplier", new Supplier());
-        return "create_supplier";
+        return "create-supplier";
     }
 
     @PostMapping

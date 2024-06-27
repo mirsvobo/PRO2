@@ -28,7 +28,7 @@ public class ReceiptController {
     public String createReceiptForm(Model model) {
         model.addAttribute("receipt", new Receipt());
         model.addAttribute("items", itemService.findAll());
-        return "create_receipt";
+        return "create-receipt";
     }
 
     @PostMapping

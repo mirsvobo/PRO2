@@ -17,7 +17,7 @@ public class ProductVariantController {
     @GetMapping("/new")
     public String createVariantForm(Model model) {
         model.addAttribute("variant", new ProductVariant());
-        return "create_variant";
+        return "create-variant";
     }
 
     @PostMapping

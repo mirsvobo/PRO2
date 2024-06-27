@@ -51,7 +51,7 @@ public class ItemController {
         model.addAttribute("categories", categories);
         model.addAttribute("variants", variants);
 
-        return "create_item";
+        return "create-item";
     }
 
     @PostMapping
