@@ -4,31 +4,40 @@
     <title>Create Item</title>
 </head>
 <body>
-<div th:replace="fragments/header :: header"></div>
-<h2>Create Item</h2>
-<form th:action="@{/items}" th:object="${item}" method="post">
-    <label for="name">Name:</label>
-    <input type="text" id="name" th:field="*{name}" required>
-
-    <label for="price">Price:</label>
-    <input type="number" id="price" th:field="*{price}" step="0.01" required>
-
-    <label for="supplier">Supplier:</label>
-    <select id="supplier" th:field="*{supplier}" required>
-        <option th:each="supplier : ${suppliers}" th:value="${supplier.id}" th:text="${supplier.name}"></option>
-    </select>
-
-    <label for="category">Category:</label>
-    <select id="category" th:field="*{category}" required>
-        <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
-    </select>
-
-    <label for="variant">Variant:</label>
-    <select id="variant" th:field="*{variant}" required>
-        <option th:each="variant : ${variants}" th:value="${variant.id}" th:text="${variant.name}"></option>
-    </select>
-
-    <button type="submit">Save</button>
+<h1>Create Item</h1>
+<form th:action="@{/items/create}" th:object="${item}" method="post">
+    <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name" th:field="*{name}" />
+    </div>
+    <div>
+        <label for="price">Price:</label>
+        <input type="text" id="price" th:field="*{price}" />
+    </div>
+    <div>
+        <label for="category">Category:</label>
+        <select id="category" th:field="*{category.id}">
+            <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}">Category</option>
+        </select>
+    </div>
+    <div>
+        <label for="supplier">Supplier:</label>
+        <select id="supplier" th:field="*{supplier.id}">
+            <option th:each="supplier : ${suppliers}" th:value="${supplier.id}" th:text="${supplier.name}">Supplier</option>
+        </select>
+    </div>
+    <div>
+        <label>Variants:</label>
+        <div th:each="variant : ${variants}">
+            <label>
+                <input type="checkbox" th:field="*{variants}" th:value="${variant.id}" th:id="'variant-' + ${variant.id}" />
+            </label>
+            <label th:for="'variant-' + ${variant.id}" th:text="${variant.name}"></label>
+        </div>
+    </div>
+    <div>
+        <button type="submit">Save</button>
+    </div>
 </form>
 </body>
 </html>

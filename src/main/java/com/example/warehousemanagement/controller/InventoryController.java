@@ -1,21 +1,29 @@
 package com.example.warehousemanagement.controller;
 
 import com.example.warehousemanagement.model.Inventory;
+import com.example.warehousemanagement.model.Item;
+import com.example.warehousemanagement.model.ProductVariant;
+import com.example.warehousemanagement.repository.ProductVariantRepository;
 import com.example.warehousemanagement.service.InventoryService;
 import com.example.warehousemanagement.service.ItemService;
+import com.example.warehousemanagement.service.ProductVariantService;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/inventories")
 public class InventoryController {
     private final InventoryService inventoryService;
     private final ItemService itemService;
+    private final ProductVariantService productVariantService;
 
-    public InventoryController(InventoryService inventoryService, ItemService itemService) {
+    public InventoryController(InventoryService inventoryService, ItemService itemService, ProductVariantService productVariantService) {
         this.inventoryService = inventoryService;
         this.itemService = itemService;
+        this.productVariantService = productVariantService;
     }
 
     @GetMapping
@@ -26,8 +34,14 @@ public class InventoryController {
 
     @GetMapping("/new")
     public String createInventoryForm(Model model) {
-        model.addAttribute("inventory", new Inventory());
-        model.addAttribute("items", itemService.findAll());
+        Inventory inventory = new Inventory();
+        List<Item> items = itemService.findAll();
+        List<ProductVariant> variants = productVariantService.findAll();
+
+        model.addAttribute("inventory", inventory);
+        model.addAttribute("items", items);
+        model.addAttribute("variants", variants);
+
         return "create-inventory";
     }
 

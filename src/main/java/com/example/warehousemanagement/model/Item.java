@@ -1,28 +1,28 @@
 package com.example.warehousemanagement.model;
 
-import jakarta.persistence.Entity;
 import jakarta.persistence.*;
-
-import java.math.BigDecimal;
+import java.util.Set;
 
 @Entity
 public class Item {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
-
-    private BigDecimal price;
-
-    @ManyToOne
-    private Supplier supplier;
+    private Double price;
 
     @ManyToOne
     private Category category;
 
     @ManyToOne
-    private ProductVariant variant;
+    private Supplier supplier;
+
+    @ManyToMany
+    private Set<ProductVariant> variants;
+
+    // Gettery a settery
 
     public Long getId() {
         return id;
@@ -40,20 +40,12 @@ public class Item {
         this.name = name;
     }
 
-    public BigDecimal getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(Double price) {
         this.price = price;
-    }
-
-    public Supplier getSupplier() {
-        return supplier;
-    }
-
-    public void setSupplier(Supplier supplier) {
-        this.supplier = supplier;
     }
 
     public Category getCategory() {
@@ -64,11 +56,19 @@ public class Item {
         this.category = category;
     }
 
-    public ProductVariant getVariant() {
-        return variant;
+    public Supplier getSupplier() {
+        return supplier;
     }
 
-    public void setVariant(ProductVariant variant) {
-        this.variant = variant;
+    public void setSupplier(Supplier supplier) {
+        this.supplier = supplier;
+    }
+
+    public Set<ProductVariant> getVariants() {
+        return variants;
+    }
+
+    public void setVariants(Set<ProductVariant> variants) {
+        this.variants = variants;
     }
 }

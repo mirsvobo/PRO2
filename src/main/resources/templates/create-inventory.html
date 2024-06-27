@@ -1,25 +1,41 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Create Inventory</title>
+    <title>Create Item</title>
 </head>
 <body>
-<div th:replace="fragments/header :: header"></div>
-<h2>Create Inventory</h2>
-<form th:action="@{/inventories}" th:object="${inventory}" method="post">
-    <label for="date">Date:</label>
-    <input type="date" id="date" th:field="*{date}" required>
-
-    <label>Items:</label>
-    <div th:each="item : ${items}">
-        <div>
-            <input type="checkbox" th:field="*{itemIds}" th:value="${item.id}" th:id="${'item-' + ${item.id}}">
-            <label th:for="${'item-' + ${item.id}}" th:text="${item.name}"></label>
-            <input type="number" th:field="*{itemQuantities[${item.id}]}" min="0" step="1" th:id="${'quantity-' + ${item.id}}" required>
-            <label th:for="${'quantity-' + ${item.id}}">Quantity</label>
+<h1>Create Item</h1>
+<form action="#" th:action="@{/items/create}" th:object="${item}" method="post">
+    <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name" th:field="*{name}" />
+    </div>
+    <div>
+        <label for="price">Price:</label>
+        <input type="text" id="price" th:field="*{price}" />
+    </div>
+    <div>
+        <label for="category">Category:</label>
+        <select id="category" th:field="*{category.id}">
+            <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+        </select>
+    </div>
+    <div>
+        <label for="supplier">Supplier:</label>
+        <select id="supplier" th:field="*{supplier.id}">
+            <option th:each="supplier : ${suppliers}" th:value="${supplier.id}" th:text="${supplier.name}"></option>
+        </select>
+    </div>
+    <div>
+        <label for="variants">Variants:</label>
+        <div th:each="variant : ${item.variants}">
+            <input type="checkbox" th:field="*{variants}" th:value="${variant.id}" th:id="'variant-' + ${variant.id}" />
+            <label th:for="'variant-' + ${variant.id}" th:text="${variant.name}"></label>
         </div>
     </div>
-    <button type="submit">Save</button>
+    <div>
+        <button type="submit">Save</button>
+    </div>
 </form>
 </body>
 </html>

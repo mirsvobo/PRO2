@@ -11,9 +11,11 @@ public class ProductVariant {
     private Long id;
 
     private String name;
+    private String description;
 
-    @OneToMany(mappedBy = "variant")
-    private List<Item> items;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "item_id")
+    private Item item;
 
     public Long getId() {
         return id;
@@ -31,11 +33,19 @@ public class ProductVariant {
         this.name = name;
     }
 
-    public List<Item> getItems() {
-        return items;
+    public String getDescription() {
+        return description;
     }
 
-    public void setItems(List<Item> items) {
-        this.items = items;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Item getItem() {
+        return item;
+    }
+
+    public void setItem(Item item) {
+        this.item = item;
     }
 }
