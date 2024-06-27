@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Product Variants</title>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<h2>Product Variants</h2>
+<a th:href="@{/variants/new}">Create New Product Variant</a>
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="variant : ${variants}">
+        <td th:text="${variant.name}">Variant Name</td>
+        <td>
+            <a th:href="@{/variants/edit/{id}(id=${variant.id})}">Edit</a>
+            <a th:href="@{/variants/delete/{id}(id=${variant.id})}">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

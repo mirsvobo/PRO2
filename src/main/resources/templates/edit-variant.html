@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Product Variant</title>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<h2>Edit Product Variant</h2>
+<form th:action="@{/variants/{id}(id=${variant.id})}" th:object="${variant}" method="post">
+    <label for="name">Name:</label>
+    <input type="text" id="name" th:field="*{name}" required>
+    <button type="submit">Save</button>
+</form>
+</body>
+</html>

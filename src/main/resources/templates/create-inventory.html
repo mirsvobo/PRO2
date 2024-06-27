@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create Inventory</title>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<h2>Create Inventory</h2>
+<form th:action="@{/inventories}" th:object="${inventory}" method="post">
+    <label for="date">Date:</label>
+    <input type="date" id="date" th:field="*{date}" required>
+
+    <label>Items:</label>
+    <div th:each="item : ${items}">
+        <div>
+            <input type="checkbox" th:field="*{itemIds}" th:value="${item.id}" th:id="${'item-' + ${item.id}}">
+            <label th:for="${'item-' + ${item.id}}" th:text="${item.name}"></label>
+            <input type="number" th:field="*{itemQuantities[${item.id}]}" min="0" step="1" th:id="${'quantity-' + ${item.id}}" required>
+            <label th:for="${'quantity-' + ${item.id}}">Quantity</label>
+        </div>
+    </div>
+    <button type="submit">Save</button>
+</form>
+</body>
+</html>

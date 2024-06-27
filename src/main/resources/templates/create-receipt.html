@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create Receipt</title>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<h2>Create Receipt</h2>
+<form th:action="@{/receipts}" th:object="${receipt}" method="post">
+    <label for="date">Date:</label>
+    <input type="date" id="date" th:field="*{date}" required>
+    <label for="items">Items:</label>
+    <div th:each="item : ${items}">
+        <input type="checkbox" th:field="*{items}" th:value="${item}" th:text="${item.name}"> <input type="number" th:field="*{itemQuantities[${item.id}]}" min="0" step="1" required>
+    </div>
+    <button type="submit">Save</button>
+</form>
+</body>
+</html>
