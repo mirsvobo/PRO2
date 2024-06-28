@@ -30,4 +30,11 @@ public class CategoryService {
     public Optional<Category> findById(Long id) {
         return categoryRepository.findById(id);
     }
+
+    public Optional<Category> getCategoryById(long l) {
+        return categoryRepository.findById(l);
+    }
+
+    public Category createCategory(Category category) {return categoryRepository.save(category);
+    }
 }

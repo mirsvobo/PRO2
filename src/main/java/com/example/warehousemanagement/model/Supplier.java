@@ -15,7 +15,6 @@ public class Supplier {
     @OneToMany(mappedBy = "supplier", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Item> items;
 
-    // Gettery a settery
     public Long getId() {
         return id;
     }

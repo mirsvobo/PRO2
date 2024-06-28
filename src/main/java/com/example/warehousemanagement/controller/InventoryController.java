@@ -64,11 +64,6 @@ public class InventoryController {
     @GetMapping("/inventory/{id}")
     public String getInventoryDetails(@PathVariable Long id, Model model) {
         Inventory inventory = inventoryService.findById(id);
-        if (inventory == null) {
-            // Handle the case where inventory is not found
-            return "error";
-        }
-        // Explicitně načíst položky pro zajištění lazy loadingu
         inventory.getInventoryItems().forEach(item -> item.getProductVariant().getName());
         model.addAttribute("inventory", inventory);
         return "inventory-detail";

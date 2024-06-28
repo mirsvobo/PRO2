@@ -28,10 +28,10 @@ public class InventoryItem {
     private int initialQuantity;
     private int delivered;
     private int finalQuantity;
-    private int consumption; // přidáno pole consumption
+    private int consumption;
 
     public InventoryItem() {
-        this.consumption = 0; // výchozí hodnota pro consumption
+        this.consumption = 0;
     }
 
     // Gettery a settery
@@ -73,7 +73,7 @@ public class InventoryItem {
 
     public void setInitialQuantity(int initialQuantity) {
         this.initialQuantity = initialQuantity;
-        updateConsumption(); // aktualizace consumption
+        updateConsumption();
     }
 
     public int getDelivered() {
@@ -82,7 +82,7 @@ public class InventoryItem {
 
     public void setDelivered(int delivered) {
         this.delivered = delivered;
-        updateConsumption(); // aktualizace consumption
+        updateConsumption();
     }
 
     public int getFinalQuantity() {
@@ -91,7 +91,7 @@ public class InventoryItem {
 
     public void setFinalQuantity(int finalQuantity) {
         this.finalQuantity = finalQuantity;
-        updateConsumption(); // aktualizace consumption
+        updateConsumption();
     }
 
     public int getConsumption() {

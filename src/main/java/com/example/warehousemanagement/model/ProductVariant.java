@@ -18,8 +18,6 @@ public class ProductVariant {
     @JoinColumn(name = "item_id")
     private Item item;
 
-    // Getters and setters
-
     public Long getId() {
         return id;
     }
