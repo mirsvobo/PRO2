@@ -2,33 +2,54 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Edit Item</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<h1>Edit Item</h1>
-<form th:action="@{/items/edit/{id}(id=${item.id})}" method="post">
-    <input type="hidden" name="_method" value="put" />
-    <div>
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" th:value="${item.name}" required />
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Warehouse Management</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link" th:href="@{/items}">Items</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/inventories}">Inventory</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/suppliers}">Suppliers</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/categories}">Categories</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/variants}">Variants</a></li>
+            <li class="nav-item">
+                <form th:action="@{/auth/logout}" method="post" style="display:inline;">
+                    <button type="submit" class="btn btn-link">Logout</button>
+                </form>
+            </li>
+        </ul>
     </div>
-    <div>
-        <label for="category">Category:</label>
-        <select id="category" name="category.id" required>
-            <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"
-                    th:selected="${item.category != null} ? ${item.category.id} == ${category.id} : false"></option>
-        </select>
-    </div>
-    <div>
-        <label for="supplier">Supplier:</label>
-        <select id="supplier" name="supplier.id" required>
-            <option th:each="supplier : ${suppliers}" th:value="${supplier.id}" th:text="${supplier.name}"
-                    th:selected="${item.supplier != null} ? ${item.supplier.id} == ${supplier.id} : false"></option>
-        </select>
-    </div>
-    <div>
-        <button type="submit">Save</button>
-    </div>
-</form>
-<a th:href="@{/items}">Back to list</a>
+</nav>
+<div class="container mt-5">
+    <h1>Edit Item</h1>
+    <form th:action="@{/items/edit/{id}(id=${item.id})}" method="post">
+        <input type="hidden" name="_method" value="put" />
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" th:value="${item.name}" class="form-control" required />
+        </div>
+        <div class="form-group">
+            <label for="category">Category:</label>
+            <select id="category" name="category.id" class="form-control" required>
+                <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"
+                        th:selected="${item.category != null} ? ${item.category.id} == ${category.id} : false"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="supplier">Supplier:</label>
+            <select id="supplier" name="supplier.id" class="form-control" required>
+                <option th:each="supplier : ${suppliers}" th:value="${supplier.id}" th:text="${supplier.name}"
+                        th:selected="${item.supplier != null} ? ${item.supplier.id} == ${supplier.id} : false"></option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+    <a class="btn btn-secondary mt-3" th:href="@{/items}">Back to list</a>
+</div>
 </body>
 </html>

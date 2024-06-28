@@ -3,24 +3,32 @@
 <head>
     <title>Inventory List</title>
     <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<header>
-    <h1>Warehouse Management System</h1>
-    <nav>
-        <ul>
-            <li><a th:href="@{/items}">Items</a></li>
-            <li><a th:href="@{/inventories}">Inventory</a></li>
-            <li><a th:href="@{/suppliers}">Suppliers</a></li>
-            <li><a th:href="@{/categories}">Categories</a></li>
-            <li><a th:href="@{/variants}">Variants</a></li>
-            <li><a th:href="@{/auth/logout}" th:method="post">Logout</a></li>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Warehouse Management</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link" th:href="@{/items}">Items</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/inventories}">Inventory</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/suppliers}">Suppliers</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/categories}">Categories</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/variants}">Variants</a></li>
+            <li class="nav-item">
+                <form th:action="@{/auth/logout}" method="post" style="display:inline;">
+                    <button type="submit" class="btn btn-link">Logout</button>
+                </form>
+            </li>
         </ul>
-    </nav>
-</header>
-<main>
+    </div>
+</nav>
+<div class="container mt-5">
     <h2>Inventory List</h2>
-    <table>
+    <table class="table table-striped">
         <thead>
         <tr>
             <th>Date</th>
@@ -34,13 +42,13 @@
             <td th:text="${inventory.date}"></td>
             <td th:text="${inventory.month}"></td>
             <td th:text="${inventory.year}"></td>
-            <td><a th:href="@{/inventories/{id}(id=${inventory.id})}">View Details</a></td>
+            <td><a th:href="@{/inventories/{id}(id=${inventory.id})}" class="btn btn-info">View Details</a></td>
         </tr>
         </tbody>
     </table>
-    <a th:href="@{/inventories/add}">Add New Inventory</a>
-</main>
-<footer>
+    <a th:href="@{/inventories/add}" class="btn btn-primary">Add New Inventory</a>
+</div>
+<footer class="text-center mt-5">
     <p>&copy; 2024 Warehouse Management System. All rights reserved.</p>
 </footer>
 </body>

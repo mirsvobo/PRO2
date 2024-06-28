@@ -17,7 +17,7 @@ public class SupplierController {
     @GetMapping
     public String listSuppliers(Model model) {
         model.addAttribute("suppliers", supplierService.findAll());
-        return "suppliers";
+        return "list-suppliers";
     }
 
     @GetMapping("/new")
@@ -45,9 +45,9 @@ public class SupplierController {
         return "redirect:/suppliers";
     }
 
-    @DeleteMapping("/delete/{id}")
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public String deleteSupplier(@PathVariable Long id) {
-        supplierService.delete(id);
+        supplierService.deleteSupplierById(id);
         return "redirect:/suppliers";
     }
 }

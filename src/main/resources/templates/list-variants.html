@@ -2,31 +2,58 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>List of Product Variants</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<h1>List of Product Variants</h1>
-<table>
-    <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Price</th>
-        <th>Item</th>
-        <th>Actions</th>
-    </tr>
-    <tr th:each="variant : ${variants}">
-        <td th:text="${variant.name}">Name</td>
-        <td th:text="${variant.description}">Description</td>
-        <td th:text="${variant.price}">Price</td>
-        <td th:text="${variant.item != null ? variant.item.name : 'No Item'}">Item Name</td>
-        <td>
-            <a th:href="@{/variants/edit/{id}(id=${variant.id})}">Edit</a>
-            <form th:action="@{/variants/delete/{id}(id=${variant.id})}" method="post" style="display:inline;">
-                <input type="hidden" name="_method" value="DELETE"/>
-                <button type="submit">Delete</button>
-            </form>
-        </td>
-    </tr>
-</table>
-<a th:href="@{/variants/new}">Add New Variant</a>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Warehouse Management</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link" th:href="@{/items}">Items</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/inventories}">Inventory</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/suppliers}">Suppliers</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/categories}">Categories</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/variants}">Variants</a></li>
+            <li class="nav-item">
+                <form th:action="@{/auth/logout}" method="post" style="display:inline;">
+                    <button type="submit" class="btn btn-link">Logout</button>
+                </form>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container mt-5">
+    <h1>List of Product Variants</h1>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Item</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="variant : ${variants}">
+            <td th:text="${variant.name}">Name</td>
+            <td th:text="${variant.description}">Description</td>
+            <td th:text="${variant.price}">Price</td>
+            <td th:text="${variant.item != null ? variant.item.name : 'No Item'}">Item Name</td>
+            <td>
+                <a th:href="@{/variants/edit/{id}(id=${variant.id})}" class="btn btn-warning btn-sm">Edit</a>
+                <form th:action="@{/variants/delete/{id}(id=${variant.id})}" method="post" style="display:inline;">
+                    <input type="hidden" name="_method" value="DELETE"/>
+                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a th:href="@{/variants/new}" class="btn btn-primary">Add New Variant</a>
+</div>
 </body>
 </html>
