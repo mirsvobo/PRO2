@@ -34,6 +34,10 @@ public class InventoryService {
     public List<InventoryItem> getItemsByInventoryId(Long inventoryId) {
         return inventoryItemRepository.findByInventoryId(inventoryId);
     }
+
+    public Inventory findById(Long id) {
+        return inventoryRepository.findById(id).orElse(null);
+    }
 }
 
 
