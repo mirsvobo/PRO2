@@ -18,6 +18,8 @@ public class ProductVariant {
     @JoinColumn(name = "item_id")
     private Item item;
 
+
+
     public Long getId() {
         return id;
     }
