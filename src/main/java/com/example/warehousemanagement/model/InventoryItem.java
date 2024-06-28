@@ -1,6 +1,7 @@
 package com.example.warehousemanagement.model;
 
 import jakarta.persistence.*;
+import org.antlr.v4.runtime.misc.NotNull;
 
 @Entity
 public class InventoryItem {
@@ -11,18 +12,29 @@ public class InventoryItem {
 
     @ManyToOne
     @JoinColumn(name = "inventory_id")
+    @NotNull
     private Inventory inventory;
 
     @ManyToOne
-    @JoinColumn(name = "variant_id")
+    @JoinColumn(name = "item_id")
+    @NotNull
+    private Item item;
+
+    @ManyToOne
+    @JoinColumn(name = "product_variant_id")
+    @NotNull
     private ProductVariant productVariant;
 
     private int initialQuantity;
-    private int finalQuantity;
     private int delivered;
+    private int finalQuantity;
+    private int consumption; // přidáno pole consumption
 
-    // Getters and Setters
+    public InventoryItem() {
+        this.consumption = 0; // výchozí hodnota pro consumption
+    }
 
+    // Gettery a settery
     public Long getId() {
         return id;
     }
@@ -39,6 +51,14 @@ public class InventoryItem {
         this.inventory = inventory;
     }
 
+    public Item getItem() {
+        return item;
+    }
+
+    public void setItem(Item item) {
+        this.item = item;
+    }
+
     public ProductVariant getProductVariant() {
         return productVariant;
     }
@@ -53,14 +73,7 @@ public class InventoryItem {
 
     public void setInitialQuantity(int initialQuantity) {
         this.initialQuantity = initialQuantity;
-    }
-
-    public int getFinalQuantity() {
-        return finalQuantity;
-    }
-
-    public void setFinalQuantity(int finalQuantity) {
-        this.finalQuantity = finalQuantity;
+        updateConsumption(); // aktualizace consumption
     }
 
     public int getDelivered() {
@@ -69,5 +82,23 @@ public class InventoryItem {
 
     public void setDelivered(int delivered) {
         this.delivered = delivered;
+        updateConsumption(); // aktualizace consumption
+    }
+
+    public int getFinalQuantity() {
+        return finalQuantity;
+    }
+
+    public void setFinalQuantity(int finalQuantity) {
+        this.finalQuantity = finalQuantity;
+        updateConsumption(); // aktualizace consumption
+    }
+
+    public int getConsumption() {
+        return consumption;
+    }
+
+    private void updateConsumption() {
+        this.consumption = this.initialQuantity + this.delivered - this.finalQuantity;
     }
 }

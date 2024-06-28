@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>New Inventory</title>
+</head>
+<body>
+<h1>New Inventory</h1>
+<form action="#" th:action="@{/inventories}" th:object="${inventory}" method="post">
+    <div>
+        <label>Date</label>
+        <input type="text" th:field="*{date}" />
+    </div>
+    <div>
+        <label>Month</label>
+        <input type="text" th:field="*{month}" />
+    </div>
+    <div>
+        <label>Year</label>
+        <input type="text" th:field="*{year}" />
+    </div>
+
+    <div th:each="item, itemStat : ${inventory.inventoryItems}">
+        <span th:if="${itemStat.first} or ${item.item} != ${inventory.inventoryItems[itemStat.index - 1].item}">
+            <h2 th:text="${item.item.name}"></h2>
+        </span>
+        <div>
+            <label>Variant: </label>
+            <span th:text="${item.productVariant.name}"></span>
+            <input type="hidden" th:field="*{inventoryItems[__${itemStat.index}__].productVariant}" />
+        </div>
+        <div>
+            <label>Initial Quantity</label>
+            <input type="text" th:field="*{inventoryItems[__${itemStat.index}__].initialQuantity}" />
+        </div>
+        <div>
+            <label>Delivered</label>
+            <input type="text" th:field="*{inventoryItems[__${itemStat.index}__].delivered}" />
+        </div>
+        <div>
+            <label>Final Quantity</label>
+            <input type="text" th:field="*{inventoryItems[__${itemStat.index}__].finalQuantity}" />
+        </div>
+    </div>
+    <div>
+        <button type="submit">Save</button>
+    </div>
+</form>
+</body>
+</html>

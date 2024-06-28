@@ -9,4 +9,6 @@ import java.util.List;
 
 public interface ProductVariantRepository extends JpaRepository<ProductVariant, Long> {
     List<ProductVariant> findByItem(Item item);
+
+    List<ProductVariant> findByItemId(Long itemId);
 }

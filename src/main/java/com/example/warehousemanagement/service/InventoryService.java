@@ -2,6 +2,7 @@ package com.example.warehousemanagement.service;
 
 import com.example.warehousemanagement.model.Inventory;
 import com.example.warehousemanagement.model.InventoryItem;
+import com.example.warehousemanagement.repository.InventoryItemRepository;
 import com.example.warehousemanagement.repository.InventoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,24 +16,24 @@ public class InventoryService {
     @Autowired
     private InventoryRepository inventoryRepository;
 
+    @Autowired
+    private InventoryItemRepository inventoryItemRepository;
+
     public List<Inventory> getAllInventories() {
-        return inventoryRepository.findAll();
+        return inventoryRepository.findAllByOrderByDateDesc();
     }
 
-    public Optional<Inventory> getInventoryById(Long id) {
-        return inventoryRepository.findById(id);
+    public Inventory getInventoryById(Long id) {
+        return inventoryRepository.findById(id).orElse(null);
     }
 
     public Inventory saveInventory(Inventory inventory) {
         return inventoryRepository.save(inventory);
     }
 
-    public void deleteInventory(Long id) {
-        inventoryRepository.deleteById(id);
-    }
-
-    public void calculateConsumptionForAllItems(Inventory inventory) {
-        inventory.calculateConsumptionForAllItems();
-        saveInventory(inventory);
+    public List<InventoryItem> getItemsByInventoryId(Long inventoryId) {
+        return inventoryItemRepository.findByInventoryId(inventoryId);
     }
 }
+
+

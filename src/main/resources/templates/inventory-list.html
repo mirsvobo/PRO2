@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Inventory List</title>
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+</head>
+<body>
+<header>
+    <h1>Warehouse Management System</h1>
+    <nav>
+        <ul>
+            <li><a th:href="@{/items}">Items</a></li>
+            <li><a th:href="@{/inventories}">Inventory</a></li>
+            <li><a th:href="@{/suppliers}">Suppliers</a></li>
+            <li><a th:href="@{/categories}">Categories</a></li>
+            <li><a th:href="@{/variants}">Variants</a></li>
+            <li><a th:href="@{/auth/logout}" th:method="post">Logout</a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <h2>Inventory List</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Date</th>
+            <th>Month</th>
+            <th>Year</th>
+            <th>Details</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="inventory : ${inventories}">
+            <td th:text="${inventory.date}"></td>
+            <td th:text="${inventory.month}"></td>
+            <td th:text="${inventory.year}"></td>
+            <td><a th:href="@{/inventories/{id}(id=${inventory.id})}">View Details</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <a th:href="@{/inventories/add}">Add New Inventory</a>
+</main>
+<footer>
+    <p>&copy; 2024 Warehouse Management System. All rights reserved.</p>
+</footer>
+</body>
+</html>

@@ -1,7 +1,7 @@
 package com.example.warehousemanagement.model;
 
 import jakarta.persistence.*;
-import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -11,15 +11,14 @@ public class Inventory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private LocalDate date;
-    private int month;
-    private int year;
+    private String date;
+    private String month;
+    private String year;
 
-    @OneToMany(mappedBy = "inventory", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<InventoryItem> inventoryItems;
+    @OneToMany(mappedBy = "inventory", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<InventoryItem> inventoryItems = new ArrayList<>();
 
-    // Getters and setters
-
+    // Gettery a settery
     public Long getId() {
         return id;
     }
@@ -28,27 +27,27 @@ public class Inventory {
         this.id = id;
     }
 
-    public LocalDate getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
-    public int getMonth() {
+    public String getMonth() {
         return month;
     }
 
-    public void setMonth(int month) {
+    public void setMonth(String month) {
         this.month = month;
     }
 
-    public int getYear() {
+    public String getYear() {
         return year;
     }
 
-    public void setYear(int year) {
+    public void setYear(String year) {
         this.year = year;
     }
 
@@ -58,17 +57,5 @@ public class Inventory {
 
     public void setInventoryItems(List<InventoryItem> inventoryItems) {
         this.inventoryItems = inventoryItems;
-    }
-
-    public void calculateConsumptionForAllItems() {
-        for (InventoryItem item : inventoryItems) {
-            ProductVariant variant = item.getProductVariant();
-            if (variant != null) {
-                int consumption = item.getInitialQuantity() - item.getFinalQuantity();
-                System.out.println("Consumption for variant " + variant.getName() + ": " + consumption);
-            } else {
-                System.err.println("ProductVariant is null for item: " + item.getId());
-            }
-        }
     }
 }

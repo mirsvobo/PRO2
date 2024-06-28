@@ -34,4 +34,13 @@ public class ProductVariantService {
     public void deleteById(Long id) {
         productVariantRepository.deleteById(id);
     }
+    public List<ProductVariant> getAllVariants() {
+        return productVariantRepository.findAll();
+    }
+    public ProductVariant getVariantById(Long id) {
+        return productVariantRepository.findById(id).orElse(null);
+    }
+    public List<ProductVariant> getVariantsByItemId(Long itemId) {
+        return productVariantRepository.findByItemId(itemId);
+    }
 }
